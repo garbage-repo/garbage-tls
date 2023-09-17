@@ -1,0 +1,17 @@
+.idea
+.gradle
+build
+captures
+
+.DS_Store
+local.properties
+signing_config.properties
+
+*.apk
+*.iml
+*.jks
+*.kate-swp
+*.keystore
+*.log
+*.swp
+*.zip

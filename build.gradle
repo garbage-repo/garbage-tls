@@ -1,0 +1,33 @@
+buildscript {
+    ext {
+        maven_repos = [
+            garbage: 'https://garbage-repo.github.io/',
+        ]
+    }
+    dependencies {
+        classpath 'com.github.johnrengelman:shadow:8.1.1'
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '[1.9, 2)'
+    id 'com.github.johnrengelman.shadow' version '[8, 9)'
+}
+
+repositories {
+    mavenCentral()
+    maven { url maven_repos.garbage }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:[1.7, 2)'
+    implementation 'garbage:tls:[0.1, 0.2)'
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'MainKt'
+    }
+}
