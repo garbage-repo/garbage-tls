@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name='app_name'>Garbage Tls Demo</string>
+
+    <string name='text__connect_using_https_url_connection'>Connect using HttpsURLConnection</string>
+    <string name='text__connect_using_ok_http'>Connect using OkHttp</string>
+</resources>

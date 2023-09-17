@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions {
+        noCompress 'ogg'
+    }
+
+    compileSdk rootProject.ext.versions.compile_sdk
+    namespace 'app'
+
+    defaultConfig {
+        applicationId 'garbage.tls.demo'
+        versionCode 1
+        versionName '0.0.0'
+
+        minSdk rootProject.ext.versions.min_sdk
+        targetSdk rootProject.ext.versions.target_sdk
+
+        multiDexEnabled true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.versions.okhttp}"
+    implementation "com.squareup.okhttp3:okhttp-tls:${rootProject.ext.versions.okhttp}"
+    implementation 'garbage:tls:[0.1, 0.2)'
+}

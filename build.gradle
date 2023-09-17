@@ -1,0 +1,44 @@
+buildscript {
+    ext {
+        maven_repos = [
+            garbage: 'https://garbage-repo.github.io/',
+        ]
+
+        some_plugins = [
+            dick: 'com.android.tools.build:gradle:[8, 9)',
+            dick_services: 'com.google.gms:google-services:4.3.+',
+        ]
+    }
+
+    repositories {
+        google()
+        jcenter()
+        maven { url maven_repos.garbage }
+    }
+
+    dependencies {
+        classpath some_plugins.dick
+        classpath some_plugins.dick_services
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.android' version '[1.9, 2)' apply false
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url rootProject.ext.maven_repos.garbage }
+    }
+}
+
+ext {
+    versions = [
+        min_sdk: 9,
+        compile_sdk: 33,
+        target_sdk: 33,
+        okhttp: '4.10.0',
+    ]
+}

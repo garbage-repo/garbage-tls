@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <item type='id' name='button__connect_using_https_url_connection'/>
+    <item type='id' name='button__connect_using_ok_http'/>
+
+    <item type='id' name='text'/>
+</resources>
