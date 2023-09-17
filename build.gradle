@@ -1,0 +1,56 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '[1.9, 2)'
+    id 'maven-publish'
+}
+
+def parse_version() {
+    return new groovy.json.JsonSlurper().parse(file('src/main/resources/garbage/tls/version.json'))['version'].replaceAll('[+-].+$', new String())
+}
+
+version = parse_version()
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:[1.7, 2)'
+}
+
+// ╔═══════════╗
+// ║   MAVEN   ║
+// ╚═══════════╝
+
+publishing {
+    repositories {
+        maven {
+            url = 'file:///usr/local/share/garbage-repo/'
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+
+            groupId = 'garbage'
+            artifactId = 'tls'
+            version = parse_version()
+        }
+    }
+}
