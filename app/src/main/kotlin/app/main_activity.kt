@@ -63,12 +63,6 @@ class MainActivity: Activity() {
         Handler(Looper.getMainLooper())
     }
 
-    private val button__connect_using_https_url_connection: View by lazy {
-        findViewById(R.id.button__connect_using_https_url_connection)
-    }
-    private val button__connect_using_ok_http: View by lazy {
-        findViewById(R.id.button__connect_using_ok_http)
-    }
     private val text: TextView by lazy {
         findViewById(R.id.text) as TextView
     }
@@ -78,8 +72,8 @@ class MainActivity: Activity() {
 
         setContentView(R.layout.activity__main)
 
-        for (v in arrayOf(button__connect_using_https_url_connection, button__connect_using_ok_http)) {
-            v.setOnClickListener(click_listener)
+        for (id in arrayOf(R.id.button__connect_using_https_url_connection, R.id.button__connect_using_ok_http)) {
+            findViewById<View>(id).setOnClickListener(click_listener)
         }
     }
 
@@ -88,14 +82,8 @@ class MainActivity: Activity() {
         ui_handler.postDelayed({ view.setEnabled(true) }, 500L)
 
         val (name, job) = when (view.getId()) {
-            R.id.button__connect_using_https_url_connection -> Pair(
-                "HttpsURLConnection",
-                ::connect_using_https_url_connection,
-            )
-            R.id.button__connect_using_ok_http -> Pair(
-                "OkHttp",
-                ::connect_using_ok_http,
-            )
+            R.id.button__connect_using_https_url_connection -> Pair("HttpsURLConnection", ::connect_using_https_url_connection)
+            R.id.button__connect_using_ok_http -> Pair("OkHttp", ::connect_using_ok_http)
             else -> null
         }!!
         Thread({
