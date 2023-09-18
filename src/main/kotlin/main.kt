@@ -32,7 +32,7 @@ private const val PORT = 12012
 
 private const val BR = "\r\n"
 private val DATA = "${G.NAME} ${G.VERSION} says Hi!\n"
-private val RESPONSE = "HTTP/1.1 200${BR}content-length: ${DATA.length}${BR}content-type: text/plain$BR$BR$DATA"
+private val RESPONSE = "HTTP/1.1 200${BR}content-length: ${DATA.length}${BR}content-type: text/plain$BR$BR$DATA".toByteArray()
 
 fun main() {
     println("${G.NAME}: ${G.VERSION}")
@@ -44,7 +44,7 @@ fun main() {
             server_socket.accept().use {
                 println("New client: ${it.getRemoteSocketAddress()}")
                 it.getOutputStream().use {
-                    it.write(RESPONSE.toByteArray())
+                    it.write(RESPONSE)
                     it.flush()
                 }
             }
