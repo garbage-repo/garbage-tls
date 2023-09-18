@@ -121,8 +121,10 @@ The Rock has an answer:
 
 ![It's garbage](../../raw/main/docs/images/its-garbage.png)
 
-## What now
+## What now?
 
-Tell you what, throw that sh!t out, and bring in `garbage-tls`.  See [`demo`](tree/demo) branch for sample code.  See [wiki pages](wiki) for documentation.
+Tell you what, throw that sh!t out, and bring in `garbage-tls`.  See [`demo`][demo-branch] branch for sample code.  See [wiki pages][wiki] for documentation.
 
 [cert-url]: ../../blob/demo/app/src/main/resources/key.pem
+[demo-branch]: ../../tree/demo
+[wiki]: ../../wiki
