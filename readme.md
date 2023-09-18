@@ -87,7 +87,7 @@ With above cert, the content would be:
 So, there are 2 questions:
 
 -   The server IP address `10.0.2.2` is right there in the cert extension.  Why the ɛf do you have to write it down to the xml file?
--   The cert is right there: `@res/raw/server_certificate`, its hash can be hashed.  Why the ɛf do you have to hash it by hand, and then write it down to the xml file?
+-   The cert is right there: `@raw/server_certificate`, its hash can be hashed.  Why the ɛf do you have to hash it by hand, and then write it down to the xml file?
 
 Let's use some Kotlin code to hash the cert, but in Java it doesn't even need Java 1.8:
 

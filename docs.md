@@ -55,7 +55,7 @@ class Client(
 ```kotlin
 import java.net.Socket
 
-fun connect(host: String, port: Int): Socket;
+fun connect(host: String, port: Int): Socket
 ```
 
 Connects to a `host`, at `port`.
