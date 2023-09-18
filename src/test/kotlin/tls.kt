@@ -59,11 +59,8 @@ class TlsTests {
         server_thread.start()
         runBlocking {
             launch {
-                val data_from_server = Client("/key.pem", socket_timeout).connect("localhost", server_port).use { socket ->
-                    ByteArrayOutputStream().use {
-                        socket.getInputStream().copyTo(it)
-                        it.toByteArray()
-                    }
+                val data_from_server = Client("/key.pem", socket_timeout).connect("localhost", server_port).use {
+                    it.getInputStream().readAllBytes()
                 }
                 assertArrayEquals(data, data_from_server)
                 @OptIn(kotlin.ExperimentalStdlibApi::class)
