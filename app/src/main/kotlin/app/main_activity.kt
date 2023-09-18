@@ -73,7 +73,7 @@ class MainActivity: Activity() {
         setContentView(R.layout.activity__main)
 
         for (id in arrayOf(R.id.button__connect_using_https_url_connection, R.id.button__connect_using_ok_http)) {
-            findViewById<View>(id).setOnClickListener(click_listener)
+            (findViewById(id) as View).setOnClickListener(click_listener)
         }
     }
 
