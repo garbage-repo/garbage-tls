@@ -30,7 +30,7 @@ buildscript {
         ]
 
         some_plugins = [
-            dick: 'com.android.tools.build:gradle:[8, 9)',
+            dick: 'com.android.tools.build:gradle:[8.2, 8.3)',
             dick_services: 'com.google.gms:google-services:4.3.+',
         ]
     }
