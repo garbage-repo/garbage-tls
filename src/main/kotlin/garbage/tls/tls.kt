@@ -84,15 +84,21 @@ class Client(private val x509_res_path: String, private val socket_timeout: Int 
 
 }
 
-sealed abstract class BaseServer protected constructor(
-    private val key_store_password: CharArray, private val socket_timeout: Int = SOCKET_TIMEOUT,
-) {
+class Server(private val key_store: Lazy<KeyStore>, private val password: CharArray, private val socket_timeout: Int = SOCKET_TIMEOUT) {
 
-    abstract fun load_key_store(): KeyStore
+    constructor(pkcs12_res_path: String, password: CharArray, socket_timeout: Int = SOCKET_TIMEOUT): this(lazy {
+        val result = new_pkcs12()
+        load_res(pkcs12_res_path) {
+            result.load(it, password)
+        }
+        result
+    }, password, socket_timeout) {}
+
+    constructor(key_store: KeyStore, password: CharArray, socket_timeout: Int = SOCKET_TIMEOUT): this(lazy { key_store }, password, socket_timeout) {}
 
     protected val server_socket_factory: SSLServerSocketFactory by lazy {
         val key_manager_factory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
-        key_manager_factory.init(load_key_store(), key_store_password)
+        key_manager_factory.init(key_store.value, password)
 
         val ssl_context = new_ssl_context()
         ssl_context.init(key_manager_factory.getKeyManagers(), null, SecureRandom())
@@ -106,25 +112,5 @@ sealed abstract class BaseServer protected constructor(
         result.setSoTimeout(socket_timeout)
         return result
     }
-
-}
-
-class Server(private val pkcs12_res_path: String, private val password: CharArray, private val socket_timeout: Int = SOCKET_TIMEOUT):
-BaseServer(password, socket_timeout) {
-
-    override fun load_key_store(): KeyStore {
-        val result = new_pkcs12()
-        load_res(pkcs12_res_path) {
-            result.load(it, password)
-        }
-        return result
-    }
-
-}
-
-class ServerFromKeyStore(private val key_store: KeyStore, private val password: CharArray, private val socket_timeout: Int = SOCKET_TIMEOUT):
-BaseServer(password, socket_timeout) {
-
-    override fun load_key_store() = key_store
 
 }
