@@ -62,7 +62,23 @@ Connects to a `host`, at `port`.
 
 ## `garbage.tls.Server`
 
-Constructor:
+### Constructor #1
+
+```kotlin
+class Server(
+    private val key_store: Lazy<KeyStore>,
+    private val password: CharArray,
+    private val socket_timeout: Int = 30_000,
+)
+```
+
+| Parameter         | Description
+| ----------------- | -----------
+| `key_store`       | Your keystore.
+| `password`        | Password of your keystore.
+| `socket_timeout`  | Socket timeout, in milliseconds.
+
+### Constructor #2
 
 ```kotlin
 class Server(
@@ -75,6 +91,24 @@ class Server(
 | Parameter         | Description
 | ----------------- | -----------
 | `pkcs12_res_path` | Resource path to your PKCS #12 keystore.
+| `password`        | Password of your keystore.
+| `socket_timeout`  | Socket timeout, in milliseconds.
+
+### Constructor #3
+
+```kotlin
+import java.security.KeyStore
+
+class Server(
+    private val key_store: KeyStore,
+    private val password: CharArray,
+    private val socket_timeout: Int = 30_000,
+)
+```
+
+| Parameter         | Description
+| ----------------- | -----------
+| `key_store`       | Your keystore.
 | `password`        | Password of your keystore.
 | `socket_timeout`  | Socket timeout, in milliseconds.
 
