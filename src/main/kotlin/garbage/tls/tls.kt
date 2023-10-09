@@ -121,3 +121,10 @@ BaseServer(password, socket_timeout) {
     }
 
 }
+
+class ServerFromKeyStore(private val key_store: KeyStore, private val password: CharArray, private val socket_timeout: Int = SOCKET_TIMEOUT):
+BaseServer(password, socket_timeout) {
+
+    override fun load_key_store() = key_store
+
+}
