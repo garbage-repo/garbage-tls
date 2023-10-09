@@ -94,7 +94,9 @@ class Server(private val key_store: Lazy<KeyStore>, private val password: CharAr
         result
     }, password, socket_timeout) {}
 
-    constructor(key_store: KeyStore, password: CharArray, socket_timeout: Int = SOCKET_TIMEOUT): this(lazy { key_store }, password, socket_timeout) {}
+    constructor(key_store: KeyStore, password: CharArray, socket_timeout: Int = SOCKET_TIMEOUT): this(
+        lazy { key_store }, password, socket_timeout,
+    ) {}
 
     protected val server_socket_factory: SSLServerSocketFactory by lazy {
         val key_manager_factory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
