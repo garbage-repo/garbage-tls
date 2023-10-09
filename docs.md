@@ -38,7 +38,7 @@ class Client(
 
 | Parameter         | Description
 | ----------------- | -----------
-| `x509_res_path`   | Resource path to your X.509 certificate, in [PEM][site:pem] format.
+| `x509_res_path`   | Resource path to your X.509 certificate, in either [PEM][site:pem] or [DER][site:der] format.
 | `socket_timeout`  | Socket timeout, in milliseconds.
 
 ### Properties
@@ -125,4 +125,5 @@ fun bind(port: Int, address: InetAddress? = null): ServerSocket
 
 Binds to a port.
 
+[site:der]: https://en.wikipedia.org/wiki/X.690#DER_encoding
 [site:pem]: https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail
